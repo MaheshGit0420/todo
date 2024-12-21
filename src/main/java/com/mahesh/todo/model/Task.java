@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "task")
 @Data
 @NoArgsConstructor
@@ -16,4 +18,10 @@ public class Task {
     private String title; // Title of the task
     private String description; // Detailed description of the task
     private boolean completed; // Status of the task (true or false)
+    private Date dueDate;
+    private String category;
+
+    public boolean getCompleted() {
+        return completed;
+    }
 }

@@ -4,7 +4,6 @@ import com.mahesh.todo.model.Task;
 import com.mahesh.todo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -16,8 +15,8 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public void createTask(@RequestBody Task task) {
-        taskRepository.save(task);
+    public Task createTask(@RequestBody Task task) {
+        return taskRepository.save(task);
     }
 
     public List<Task> getAllTasks() {
@@ -34,7 +33,9 @@ public class TaskService {
             Task existingTask = existingTaskOptional.get();
             existingTask.setTitle(updatedTask.getTitle());
             existingTask.setDescription(updatedTask.getDescription());
-//            existingTask.setCompleted(updatedTask.getCompleted());
+            existingTask.setDueDate(updatedTask.getDueDate());
+            existingTask.setCategory(updatedTask.getCategory());
+            existingTask.setCompleted(updatedTask.getCompleted());
             taskRepository.save(existingTask);
         }
         else {
